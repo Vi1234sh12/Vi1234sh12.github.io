@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+{% include layout/head.html %}
+
+<body>
+
+{% include layout/nav.html %}
+
+<header>
+    <div class="container-fluid">
+        <h1>{{ page.title | default: "Vishal R. Dhanure" }}</h1>
+    </div>
+</header>
+
+<main class="container" aria-label="Content">
+    {% include layout/main.html %}
+
+</main>
+{% include layout/footer.html %}
+
+</body>
+
+</html>

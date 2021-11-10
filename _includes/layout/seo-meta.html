@@ -1,0 +1,73 @@
+<meta property="og:title" content="{{ page.title }}" />
+<meta name="twitter:title" content="{{ page.title }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta name="application-name" content="{{ site.title }}" />
+<meta name="twitter:site" content="@{{ site.twitter_username }}" />
+<meta name="twitter:card" content="summary_large_image" />
+{% if page.excerpt %}
+    <meta name="description" content="{{ page.excerpt | strip_html | truncate: 155 }}" />
+    <meta property="og:description" content="{{ page.excerpt | strip_html }}" />
+    <meta name="twitter:description" content="{{ page.excerpt | strip_html | truncate: 200 }}" />
+{% else %}
+    <meta name="description" content="{{ site.description }}">
+    <meta property="og:description" content="{{ site.description }}">
+{% endif %}
+{% if page.date %}
+    <meta property="og:type" content="article" />
+    {% if page.categories.first == "projects" %}
+        {% capture currentYear %}{{ site.time | truncate: 4, "" }}{% endcapture %}
+        {% capture postYear %}{{ page.date | truncate: 4, "" }}{% endcapture %}
+        {% if currentYear == postYear %}
+            <meta property="og:article:published_date" content="{{ page.date | date: "%F" | truncate: 4, "" }}" />
+        {% else %}
+            <meta property="og:article:published_date" content="{{ page.date | date: "%F" }}" />
+        {% endif %}
+    {% else %}
+        <meta property="og:article:published_date" content="{{ page.date | date: "%F" }}" />
+    {% endif %}
+    {% if page.author %}
+        <meta name="author" content="{{ page.author }}" />
+        <meta property="og:article:author" content="{{ page.author }}" />
+    {% else %}
+        <meta name="author" content="{{ site.default_author }}" />
+        <meta property="og:article:author" content="{{ site.default_author }}" />
+    {% endif %}
+    {% if page.categories %}
+        <meta property="og:article:section" content="{{ page.categories | join: " - " }}" />
+    {% endif %}
+    {% if page.tags %}
+        {% for tag in page.tags %}
+            <meta property="og:article:tag" content="{{ tag }}" />
+        {% endfor %}
+    {% endif %}
+{% else %}
+    <meta property="og:type" content="website" />
+{% endif %}
+{% if page.images %}
+    <meta property="og:image" content="{{ site.url }}{{ page.images.first }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ page.images.first }}" />
+{% else %}
+    <meta property="og:image" content="{{ site.url }}{{ site.logo_path }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ site.logo_path }}" />
+{% endif %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "{{ site.name }}",
+    "gender": "{{ site.gender }}",
+    "logo": "{{ site.url }}{{ site.logo_path }}",
+    "email": "{{ site.email }}",
+    "url": "{{ site.url }}",
+    "sameAs": [
+        "https://github.com/{{ site.github_username }}",
+        "https://gitlab.com/{{ site.gitlab_username }}",
+        "https://www.linkedin.com/in/{{ site.linkedin_url }}/",
+        "https://twitter.com/{{ site.twitter_username }}"
+    ],
+    "knowsAbout": [
+        {{ site.knows_about }}
+    ]
+}
+</script>

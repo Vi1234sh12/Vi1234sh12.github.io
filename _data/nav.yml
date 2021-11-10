@@ -1,0 +1,26 @@
+---
+- name: home
+  link: /
+
+- name: blog
+  link: 
+
+- name: "#open"
+  link: 
+
+- name: social
+  dropdown:
+    - name: gitlab
+      link: 
+
+    - name: github
+      link: https://github.com/Vi1234sh12
+
+    - name: twitter
+      link: https://twitter.com/VishalDhanure
+    
+    - name: linkedin
+      link: https://linkedin.com/in/vishaldhanure
+
+- name: legal
+  link: /legal/
